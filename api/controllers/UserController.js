@@ -6,10 +6,8 @@ class UserController {
       let data = await User.findAll({
          include: [
            {
-              models: Auth,
-              through: {
-                 attribute: "user_id"
-              }
+              model: Auth,
+                attributes: ["user_id", "username"]
            }
          ]
       });
@@ -21,7 +19,7 @@ class UserController {
 
   static async getDataBy(req, resp) {
     try {
-      const { id } = req.params.id;
+      const id  = +req.params.id;
       let data = await User.findByPk(id);
       resp.status(200).json(data);
     } catch (error) {
@@ -81,6 +79,7 @@ class UserController {
       const id = +req.params.id;
       let data = await User.destroy({
         where: { id },
+        froce:true
       });
       data ?
       resp.status(200).json({

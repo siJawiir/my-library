@@ -12,7 +12,7 @@
 
 >> BookGenre
 >> ```
->> npx sequelize-cli model:generate --name BookGenre --attributes pub_id:integer,gen_id:integer
+>> npx sequelize-cli model:generate --name BookGenre --attributes book_id:integer,gen_id:integer
 >> ```
 
 >> Genre

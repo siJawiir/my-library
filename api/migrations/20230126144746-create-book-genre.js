@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      pub_id: {
+      book_id: {
         type: Sequelize.INTEGER
       },
       gen_id: {

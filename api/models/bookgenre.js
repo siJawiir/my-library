@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   BookGenre.init({
-    pub_id: DataTypes.INTEGER,
+    book_id: DataTypes.INTEGER,
     gen_id: DataTypes.INTEGER
   }, {
     sequelize,
