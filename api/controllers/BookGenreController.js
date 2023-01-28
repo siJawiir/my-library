@@ -4,7 +4,7 @@ class BookGenreController {
     static async getData(req, resp) {
       try {
          let data = await BookGenre.findAll({
-           incluide: [
+           include: [
              {
                model: Genre,
                attributes: ["genre"],

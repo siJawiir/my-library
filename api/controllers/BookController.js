@@ -1,23 +1,27 @@
-const { Book, Publisher, BookGenre } = require("../models");
+const {Cart, Book, Genre, Publisher } = require("../models");
 
 class BookController {
   static async getData(req, resp) {
     try {
       let data = await Book.findAll({
-        incluide: [
+        include: [
           {
-            model: BookGenre,
-            attributes: ["book_id", "gen_id"],
+            model: Genre,
+                attributes: ["genre"],
           },
           {
             model: Publisher,
             attributes: ["pub_name"],
           },
+          {
+            model: Cart,
+          },
         ],
       });
       resp.status(200).json(data);
     } catch (error) {
-      resp.status(500).json(error);
+      // resp.status(500).json(error);
+      console.log(error)
     }
   }
 

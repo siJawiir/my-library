@@ -1,14 +1,14 @@
-const {Publisher, Book} = require('../models');
+const {Publisher, Book, Genre} = require('../models');
 
 class PublisherController {
     static async getData(req, resp) {
       try {
          let data = await Publisher.findAll({
-           incluide: [
+           include: [
              {
                model: Book,
                attributes: ["title", "price"],
-             },
+             }
            ],
          });
          resp.status(200).json(data);

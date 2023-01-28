@@ -1,11 +1,11 @@
-const {Genre, BookGenre} = require('../models');
+const {Genre, Book} = require('../models');
 class GenreController {
     static async getData(req, resp) {
       try {
          let data = await Genre.findAll({
-           incluide: [
+           include: [
              {
-               model: BookGenre,
+               model: Book,
                attributes: ["book_id", "gen_id"],
              }
            ],
