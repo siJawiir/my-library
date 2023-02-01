@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
       null,
       path.parse(file.originalname).name +
         "-" +
-        // shit happens, read document multer. thanks!. ref: https://stackoverflow.com/questions/48418680/enoent-no-such-file-or-directory
+// shit happens, read document multer. thanks!. ref: https://stackoverflow.com/questions/48418680/enoent-no-such-file-or-directory
         new Date().toISOString().replace(/:/g, "-") +
         path.extname(file.originalname)
     );
@@ -33,5 +33,3 @@ exports.upload = multer({
   },
   fileFilter: fileFilter,
 });
-
-module.export = { multer };
