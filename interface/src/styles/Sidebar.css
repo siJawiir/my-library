@@ -1,72 +1,126 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
 .sidebar {
-    position: fixed;
     display: flex;
     flex-direction: column;
+    width: 250px;
+    position: fixed;
     top: 0;
     left: 0;
-    bottom: 0;
-    width: 250px;
     height: 100vh;
-    overflow-y: auto;
-    margin: 0;
-    background: var(--primaryWhite);
-    transition: 0.5s;
     z-index: 999;
+    background-color: #F8CBA6;
 }
 
-.sidebar .navbar .logo .text-logo span {
-    color: var(--primaryYellow);
-}
-
-.sidebar .navbar .logo i {
+.sidebar .logo-item i {
     display: flex;
-    padding-left: 40px;
     justify-content: center;
-    align-items: center;
     font-size: 5rem;
+    color: var(--primaryBlue);
 }
 
-.sidebar .navbar .logo .text-logo {
-    font-weight: 700;
+.sidebar .logo-item h3 {
     display: flex;
     justify-content: center;
-    padding-left: 30px;
-    align-items: center;
-}
-
-.sidebar .navbar .navbar-nav .nav-link {
-    padding: 7px 20px;
+    font-weight: 700;
     color: var(--primaryBlue);
-    font-weight: 500;
-    border-radius: 0 30px 30px 0;
-    outline: none;
 }
 
-.sidebar .navbar .navbar-nav .nav-link:hover,
-.sidebar .navbar .navbar-nav .nav-link.active {
+.sidebar .logo-item h3 span {
     color: var(--primaryYellow);
-    background: var(--secondaryBlack);
-    border-color: var(--primaryBlue);
 }
 
-.sidebar .navbar .navbar-nav .nav-link i {
+.sidebar .menu {
+    margin-bottom: auto;
+    padding-right: 20px;
+}
+
+.sidebar .menu .menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.sidebar .menu .menu-item i {
     width: 40px;
     height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--primaryYellow);
-    border-radius: 40px;
+    background-color: var(--primaryBlue);
+    border-radius: 40px
 }
 
-.sidebar .navbar .navbar-nav .nav-link:hover i,
-.sidebar .navbar .navbar-nav .nav-link.active i {
-    background: var(--primaryYellow);
+.sidebar .menu .menu-item .link-item i {
+    color: var(--primaryWhite);
+    margin-right: 1rem;
 }
 
-.sidebar .navbar .admin {
-    display: inline-flex;
+.sidebar .menu .menu-item .link-item {
+    padding: 7px 20px;
+    border-radius: 0 30px 30px 0;
+}
+
+.sidebar .menu .menu-item .link-item:hover,
+.sidebar .menu .menu-item .link-item.active {
+    background-color: var(--primaryBlue);
+    color: var(--primaryYellow);
+}
+
+.sidebar .menu .menu-item .link-item:hover i,
+.sidebar .menu .menu-item .link-item.active i {
+    background-color: var(--primaryYellow);
+    color: var(--primaryBlue);
+}
+
+.sidebar .menu .menu-item .link-item {
+    text-decoration: none;
+    color: var(--primaryBlue);
+}
+
+.sidebar .admin {
+    display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.sidebar .admin .admin-image {
+    width: 80px;
+    height: 80px;
+}
+
+.sidebar .admin .admin-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.sidebar .admin .admin-text h6 {
+    font-size: 20px;
+}
+
+.sidebar .admin .admin-text span {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.btn-logout {
+    background-color: var(--secondaryRed);
+    color: var(--primaryWhite);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-logout i {
+    padding-right: 1rem;
 }

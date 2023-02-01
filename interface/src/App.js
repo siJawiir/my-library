@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import {
-  Navbar, Sidebar
+  Navbar, Sidebar, Main
 } from './components'
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Sidebar />
+      <Main />
     </BrowserRouter>
   );
 }
