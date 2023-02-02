@@ -1,86 +1,95 @@
-const {Cart, Book} = require('../models');
+const { Cart, Book, User } = require("../models");
 
-
-class CartController{
-    static async getData(req, resp) {
-        try {
-
-      } catch (error) {
-         
-      }
+class CartController {
+  static async getData(req, resp) {
+    try {
+      let data = await Cart.findAll({
+        include: [
+          {
+            model: Book,
+            attributes: ["title", "price", "image"],
+          },
+          {
+            model: User,
+            attributes: ["fullname", "address", "city", "phone"],
+          },
+        ],
+      });
+      resp.status(200).json(data);
+    } catch (error) {
+      resp.status(500).json(error);
     }
+  }
 
-     static async getDataBy(req, resp){
-        try {
-            
-      } catch (error) {
-         
-      }
-   }
-   
-   static async postData(req, resp) {
-      try {
-           const id = +req.params.id
-           const {book_id} = req.body
-           const quantity = Number.parseInt(req.body.quantity)
+  static async getDataBy(req, resp) {
+    try {
+      const id = +req.params.id;
+      let data = await Book.findByPk(id);
+      resp.status(200).json(data);
+    } catch (error) {
+      resp.status(500).json(error);
+    }
+  }
 
-           let cart = await Cart.findAll()
-           let bookDetail = await Book.findById(book_id)
-           if (!bookDetail) {
-            return resp.status(500).json({
-               message: "invalid request"
-            })
-           };
+  static async postData(req, resp) {
+    try {
+      const {book_id, user_id, quantity} = req.body
+      const data = await Cart.create({
+         book_id, user_id, quantity
+      })
+      data
+         ? resp.status(200).json({
+             message: "Cart ID has Added!",
+             data,
+           })
+         : resp.status(403).json({
+             message: "Data ID Coulnd't be Added!",
+           });
 
-           if (cart) {
-            const indexFound = cart.items.findIndex(item => item.book_id.id == book_id)
-            if (indexFound !== -1 && quantity <= 0) {
-               cart.items.splice(indexFound,1)
-               if (cart.items.length == 0) {
-                  cart.subTotal = 0
-               } else {
-                  cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next)
-               }
-            }else if (indexFound !== -1) {
-               cart.items[indexFound].quantity = cart.items[indexFound].quantity + quantity
-               cart.items[indexFound].total = cart.items[indexFound].quantity * Book
-               cart.items[indexFound].price = cart.items[indexFound] = Book.price
-               cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next)
-            }else if (quantity > 0) {
-               cart.items.push({
-                  book_id : book_id,
-                  quantity : quantity,
-                  price: Book.price,
-                  total : parseInt(Book.price * quantity)
-               })
-               cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next)
-            } else {
-               return(
-                  resp.status(400).json({
-                     message: "invalid request"
-                  })
-               )
-            }
-            let data = await Cart.create()
-            resp.status(200).json({
-               message: "success",
-               data: data
-            })
-           }
+      // const book_id = req.body.id;
+      // let fetchedCart;
+      // let newQty = 1;
+      // req, user.getData()
+      // .then(cart => {
+      //    fetchedCart = cart;
+      //    return cart.getData({
+      //       where: {
+      //          id: book_id
+      //       }
+      //    })
+      // })
+      // .then((books) => {
+      //    let book;
+      //    if (books.length > 0) {
+      //       book = books[0]
+      //    }
+      //    if (book) {
+      //       const oldQty = book.cart.quantity;
+      //       newQty = oldQty + 1
+      //       return book
+      //    }
+      //    else {
+      //       return Book.findByPk(id)
+      //    }
+      // })
+      // .then((book) => {
+      //    return fetchedCart.addItem(book, {
+      //       through: {
+      //          quantity : newQty
+      //       }
+      //    })
+      // })
+      
+    } catch (error) {
+      resp.status(500).json(error);
+      console.log(error)
+    }
+  }
 
-
-        } catch (error) {
-            resp.status(500).json(error)
-        }
-     }
-
-     static async deleteData(req, resp) {
-        try {
-            
-        } catch (error) {
-            
-        }
-     }
+  static async deleteData(req, resp) {
+    try {
+    } catch (error) {}
+  }
 }
 
-module.exports = CartController
+module.exports = CartController;
