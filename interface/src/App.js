@@ -6,13 +6,21 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import {
   Navbar, Sidebar, Main
 } from './components'
+import StickyBox from 'react-sticky-box'
+import { Route, Routes } from 'react-router-dom';
+import { Dashboard } from './pages';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Sidebar />
-      <Main />
+      <StickyBox>
+        <Sidebar />
+        <Navbar />
+      </StickyBox>
+      <Routes>
+        <Route path='/' element={<Dashboard></Dashboard>}></Route>
+      </Routes>
+      {/* <Main /> */}
     </BrowserRouter>
   );
 }
