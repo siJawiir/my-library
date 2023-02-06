@@ -19,6 +19,20 @@ class AuthController {
 
   static async loginData(req, resp) {
     try {
+      const data = await User.findOne({
+        where: [
+          {
+            username: req.body.username
+          }
+        ]
+      })
+
+      if (!user) {
+        console.log("no email found~!", req.body.username)
+        resp.status(401).json({
+          message: "Username/pass wrong"
+        })
+      }
     } catch (error) {}
   }
 

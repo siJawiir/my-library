@@ -7,7 +7,7 @@ class CartController {
         include: [
           {
             model: Book,
-            attributes: ["title", "price", "image"],
+            attributes: ["title", "price", "image", "pub_id"],
           },
           {
             model: User,
@@ -36,33 +36,60 @@ class CartController {
 
   static async postData(req, resp) {
     try {
-      const cartItem = await Cart.findAll({
-        include: [
-          {
-            model: User,
-          },
-          {
-            model: Book,
-          },
-        ],
-      });
-      const book = await Book.findOne({ id: book_id });
 
-      if (book) {
-        const cart = cartItem.filter((book) => book.book.id === book.id);
-        if (cart.length < 1) {
-          const newItem = await Cart.create({total: book.price * quantity, quantity})
-          resp.status(200).json(newItem)
-          return await Cart.save(newItem)
-        } else {
-          // update item qty
-          const quantity = (cart[0].quantity += 1)
-          const total = cart[0]/total * quantity
 
-          return await Cart.update(cart[0].id, {quantity, total})
+      const {book_id,user_id} = req.body
+      // const id = +req.params.id
+      const book = await Book.findOne({
+          where: {
+            id: book_id,
+          },
+        });
+      const price = book.price;
+
+      const cart = await Cart.findOrCreate({
+        where: {
+          user_id
         }
-      }
-      return null;
+      })
+
+      const cartItem = await Cart.create({
+        quantity: 1,
+        book_id,
+        // user_id: req.params.id,
+        price
+      })
+      resp.status(201).json(cartItem)
+
+      // still bug
+
+      // const cartItem = await Cart.findAll({
+      //   include: [
+      //     {
+      //       model: User,
+      //     },
+      //     {
+      //       model: Book,
+      //     },
+      //   ],
+      // });
+      // const book = await Book.findOne({ id: book_id });
+
+      // if (book) {
+      //   const cart = cartItem.filter((book) => book.book.id === book.id);
+      //   if (cart.length < 1) {
+      //     const newItem = await Cart.create({total: book.price * quantity, quantity})
+      //     resp.status(200).json(newItem)
+      //     return await Cart.save(newItem)
+      //   } else {
+      //     // update item qty
+      //     const quantity = (cart[0].quantity += 1)
+      //     const total = cart[0]/total * quantity
+
+      //     return await Cart.update(cart[0].id, {quantity, total})
+      //   }
+      // }
+      // return null;
 
       // masih nge bug
 
