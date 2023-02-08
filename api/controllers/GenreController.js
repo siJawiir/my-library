@@ -6,7 +6,7 @@ class GenreController {
            include: [
              {
                model: Book,
-               attributes: ["book_id", "gen_id"],
+               attributes: ["title", "price", "pub_id"],
              }
            ],
          });
