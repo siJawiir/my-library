@@ -1,6 +1,8 @@
-const multer= require('./multer');
+const multer = require('./multer');
+const isAuthenticated = require('./isAuthenticated');
 
 
 module.exports = {
-    multer
+    multer,
+    isAuthenticated
 }

@@ -1,4 +1,8 @@
 const { Auth, User } = require("../models");
+const {decryptPwd} = require('../helpers/bcrypt');
+const { tokenGenerator, tokenVerifier } = require("../helpers/jsonweboken");
+
+
 
 class AuthController {
   static async getData(req, resp) {
@@ -17,34 +21,46 @@ class AuthController {
     }
   }
 
-  static async loginData(req, resp) {
+  static async loginData(req, resp, next) {
     try {
-      const data = await User.findOne({
-        where: [
-          {
-            username: req.body.username
-          }
-        ]
-      })
+      const { password, username } = req.body;
 
-      if (!user) {
-        console.log("no email found~!", req.body.username)
-        resp.status(401).json({
-          message: "Username/pass wrong"
-        })
+      let emailFound = await Auth.findOne({
+        where: {
+          username : username,
+        },
+      });
+
+      if (emailFound) {
+        if (decryptPwd(password, emailFound.password)) {
+          let access_token = tokenGenerator(emailFound);
+
+          let verifyToken = tokenVerifier(access_token);
+          console.log(verifyToken);
+          resp.status(200).json(access_token);
+        } else {
+          resp.status(400).json({
+            message: `invalid email/password`,
+          });
+        }
+      } else {
+        resp.status(404).json({
+          message: `name with ${username} not found!`,
+        });
       }
-    } catch (error) {}
+    } catch (error) {
+      next(error)
+      console.log(error)
+    }
   }
 
   static async registerData(req, resp) {
     try {
-      const { username, email, password, role, user_id } = req.body;
+      const { username, email, password } = req.body;
       const data = await Auth.create({
         username,
         email,
         password,
-        role,
-        user_id,
       });
       resp.status(201).json(data);
     } catch (error) {
@@ -100,6 +116,9 @@ class AuthController {
       resp.status(500).json(error)
     }
   }
+
+
+  
 }
 
 module.exports = AuthController;

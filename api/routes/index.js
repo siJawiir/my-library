@@ -22,5 +22,6 @@ route.use("/api/book_genre", bookGenreRoutes);
 route.use("/api/genres", genreRoutes);
 route.use("/api/publishers", publisherRoutes);
 route.use('/api/auth', authRoutes);
+// route.use("/google", require('../controllers/auth/google'))
 
 module.exports = route;
