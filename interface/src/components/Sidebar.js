@@ -8,12 +8,12 @@ const Sidebar = () => {
     {
       path: '/dashboard',
       name: 'Dashboard',
-      icon: <i className="bi bi-columns-gap"></i>
+      icon: <i className="bi bi-columns-gap"></i>,
     },
     {
       path: '/books',
       name: 'Books',
-      icon: <i className="bi bi-kanban-fill"></i>
+      icon: <i className="bi bi-kanban-fill"></i>,
     },
     {
       path: '/users',
