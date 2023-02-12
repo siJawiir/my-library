@@ -32,7 +32,7 @@ class AuthController {
       });
 
       if (emailFound) {
-        if (!decryptPwd(password, emailFound.password)) {
+        if (decryptPwd(password, emailFound.password)) {
           let access_token = tokenGenerator(emailFound);
 
           let verifyToken = tokenVerifier(access_token);

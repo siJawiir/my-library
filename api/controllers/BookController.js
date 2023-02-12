@@ -48,9 +48,15 @@ class BookController {
         pub_id,
         title,
         price,
-        image: req.file.filename,
+        image:
+          req.protocol +
+          "://" +
+          req.get("host") +
+          "/img/uploads/" +
+          req.file.filename,
         desc,
       });
+
       data
         ? resp.status(200).json({
             message: "Data ID has Added!",

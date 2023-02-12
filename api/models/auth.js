@@ -1,5 +1,6 @@
 "use strict";
 const { encryptPwd } = require("../helpers/bcrypt");
+const { options } = require("../routes");
 
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
