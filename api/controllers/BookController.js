@@ -1,4 +1,4 @@
-const {Cart, Book, Genre, Publisher } = require("../models");
+const { Cart, Book, Genre, Publisher } = require("../models");
 
 class BookController {
   static async getData(req, resp) {
@@ -7,7 +7,7 @@ class BookController {
         include: [
           {
             model: Genre,
-                attributes: ["genre"],
+            attributes: ["genre"],
           },
           {
             model: Publisher,
@@ -21,7 +21,7 @@ class BookController {
       resp.status(200).json(data);
     } catch (error) {
       // resp.status(500).json(error);
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -32,7 +32,7 @@ class BookController {
         where: {
           id,
         },
-         // include: [{ model: Publisher }],
+        // include: [{ model: Publisher }],
       });
       resp.status(200).json(data);
     } catch (error) {
@@ -43,12 +43,12 @@ class BookController {
 
   static async postData(req, resp) {
     try {
-      const { pub_id, title, price, image, desc } = req.body;
+      const { pub_id, title, price, desc } = req.body;
       const data = await Book.create({
         pub_id,
         title,
         price,
-        image,
+        image: req.file.filename,
         desc,
       });
       data
@@ -61,6 +61,7 @@ class BookController {
           });
     } catch (error) {
       resp.status(500).json(error);
+      console.log(error);
     }
   }
 
