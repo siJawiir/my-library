@@ -1,9 +1,21 @@
-//pages indexes
-import Dashboard from "./Dashboard";
-import User from "./Users/User";
-import Book from "./Books/Book";
-import Setting from "./Setting";
+import HomePage from "./HomePage";
+import PageNotFound from "./PageNotFound";
+import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
+import BookPage from "./books/BookPage";
+import AuthorPage from "./books/AuthorPage";
+import CategoryPage from "./books/CategoryPage";
+import SettingPage from "./SettingPage";
+import UserPage from "./UserPage";
 
 export {
-    Dashboard, User, Book, Setting
-}
+  HomePage,
+  PageNotFound,
+  LoginPage,
+  RegisterPage,
+  BookPage,
+  AuthorPage,
+  CategoryPage,
+  SettingPage,
+  UserPage,
+};

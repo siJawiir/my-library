@@ -1,108 +1,73 @@
 import React from "react";
-import "../styles/Sidebar.css";
-// import StickyBox from 'react-sticky-box'
-import { NavLink } from "react-router-dom";
+import Logo from "../images/Logo.png";
+import Avatar from "../images/avatar.png";
+import { RiDashboardFill } from "react-icons/ri";
+import { ImBooks } from "react-icons/im";
+import { FaUsers } from "react-icons/fa";
+import { MdLogout, MdSettings } from "react-icons/md";
+import ToolTips from "../utils/ToolTips";
 
-const Sidebar = () => {
-  const menuItem = [
-    {
-      path: '/dashboard',
-      name: 'Dashboard',
-      icon: <i className="bi bi-columns-gap"></i>,
-    },
-    {
-      path: '/books',
-      name: 'Books',
-      icon: <i className="bi bi-kanban-fill"></i>,
-    },
-    {
-      path: '/users',
-      name: 'Users',
-      icon: <i className="bi bi-people-fill"></i>
-    },
-    {
-      path: '/settings',
-      name: 'Setting',
-      icon: <i className="bi bi-gear-fill"></i>
-    }
-  ]
-
+function Sidebar(props) {
   return (
-    // <div className="wrapper">
-    //   <div className="sidebar">
-    //     <div className="logo-item">
-    //       <i className="bi bi-book-half"></i>
-    //       <h3 className="text-logo">
-    //         G<span>BS</span>
-    //       </h3>
-    //     </div>
-    //     <div className="menu">
-    //       <div className="menu-item">
-    //         <Link className="link-item active" to="#">
-    //           <i className="bi bi-columns-gap"></i>Dashboard
-    //         </Link>
-    //       </div>
-    //       <div className="menu-item">
-    //         <Link className="link-item" to="#">
-    //           <i className="bi bi-kanban-fill"></i>Books
-    //         </Link>
-    //       </div>
-    //       <div className="menu-item">
-    //         <Link className="link-item" to="#">
-    //           <i className="bi bi-people-fill"></i>Users
-    //         </Link>
-    //       </div>
-    //       <div className="menu-item">
-    //         <Link className="link-item" to="#">
-    //           <i className="bi bi-gear-fill"></i>Settings
-    //         </Link>
-    //       </div>
-    //     </div>
-    //     <div className="admin">
-    //         <img className="rounded-circle admin-image" src="img/user.jpg" />
-    //         <div className="admin-text">
-    //         <h6 className="admin-name">Made</h6>
-    //         <span>Admin</span>
-    //         <button className="btn-logout"><i className="bi bi-box-arrow-right"></i>Logout</button>
-    //     </div>
-    //     </div>
-        
-       
-    //   </div>
-    // </div>
-    <div className="wrapper">
-      <div className="sidebar">
-        <div className="top-section">
-          <div className="logo-item">
-            <i className="bi bi-book-half"></i>
-            <h3 className="text-logo">
-              G<span>BS</span>
-            </h3>
+    <div>
+      <aside className="h-screen sticky top-0 bg-white border-r border-gray-200 w-24 flex flex-col items-center">
+        <div className="flex items-center justify-center border-b border-gray-400">
+          <img src={Logo} className="h-24 w-16" />
+        </div>
+        <nav className="flex flex-l flex-col gap-y-4 pt-16">
+          <a
+            className={`group p-2 text-grey hover:text-primary1 border-b-2 border-double hover:border-primary2
+    border-transparent hover:border-current cursor-pointer select-none ${ props.Home }` }
+            href="/"
+          >
+            <RiDashboardFill className="h-10 w-10 " />
+            <ToolTips>Dashboard</ToolTips>
+          </a>
+          
+          <a
+            className={`group p-2 text-grey hover:text-primary1 border-b-2 border-double hover:border-primary2
+    border-transparent hover:border-current cursor-pointer select-none ${ props.Books }` }
+            href="books/"
+          >
+            <ImBooks className="h-10 w-10 " />
+            <ToolTips>Books</ToolTips>
+          </a>
+          <a
+            className={`group p-2 text-grey hover:text-primary1 border-b-2 border-double hover:border-primary2
+    border-transparent hover:border-current cursor-pointer select-none ${ props.Users }` }
+            href="/users"
+          >
+            <FaUsers className="h-10 w-10 " />
+            <ToolTips>Users</ToolTips>
+          </a>
+          <a
+            className={`group p-2 text-grey hover:text-primary1 border-b-2 border-double hover:border-primary2
+    border-transparent hover:border-current cursor-pointer select-none ${ props.Settings }` }
+            href="/settings"
+          >
+            <MdSettings className="h-10 w-10 " />
+            <ToolTips>Settings</ToolTips>
+          </a>
+        </nav>
+        <div className="flex items-center justify-center">
+          <div className="absolute bottom-0 p-2">
+            <img src={Avatar} className="w-16 h-16 object-center" />
+            <p className="text-center text-base">Raihan</p>
+            <p className="text-center text-sm text-primary1 font-medium">
+              Admin
+            </p>
+            <button
+              type="button"
+              class="text-white bg-secondary3 rounded-full text-sm px-2 py-1 text-center inline-flex mt-4"
+            >
+              <MdLogout />
+              <span>Logout</span>
+            </button>
           </div>
         </div>
-        <div className="menu-item">
-          {
-            menuItem.map((item, index) => (
-              <NavLink to={item.path} key={index} className="link active">
-                <div className="icon">{item.icon}</div>
-                <div className="link-text">{item.name}</div>
-              </NavLink>
-            ))
-          }
-        </div>
-        <div className="bottom-section">
-          <div className="admin">
-            <img className="rounded-circle admin-image" src="img/user.jpg" />
-            <h3 className="admin-text">
-              Raihan
-            </h3>
-            <span>Admin</span>
-            <button className="btn-logout"><i className="bi bi-box-arrow-right"></i>Logout</button>
-          </div>
-        </div>
-      </div>
+      </aside>
     </div>
   );
-};
+}
 
 export default Sidebar;
