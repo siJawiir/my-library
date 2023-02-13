@@ -16,6 +16,17 @@ class GenreController {
        }
     }
 
+    static async getStatusData(req, resp) {
+      try {
+        const id = req.id
+        let data = await Genre.findAndCountAll(id)
+        resp.status(200).json(data)
+      } catch (error) {
+        resp.status(500).json(error)
+        console.log(error)
+      }
+    }
+
      static async postData(req, resp) {
         try {
             const {genre} = req.body

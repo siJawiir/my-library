@@ -27,6 +27,18 @@ class UserController {
     }
   }
 
+  
+  static async getStatusData(req, resp) {
+    try {
+      const id = req.id
+      let data = await User.findAndCountAll(id)
+      resp.status(200).json(data)
+    } catch (error) {
+      resp.status(500).json(error)
+      console.log(error)
+    }
+  }
+
   static async postData(req, resp) {
     const { fullname, phone, address, city, image } = req.body;
     try {

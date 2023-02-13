@@ -1,4 +1,5 @@
-const { Cart, Book, Genre, Publisher } = require("../models");
+const {Cart, Book, Genre, Publisher } = require("../models");
+const { Op } = require("sequelize");
 
 class BookController {
   static async getData(req, resp) {
@@ -7,7 +8,7 @@ class BookController {
         include: [
           {
             model: Genre,
-            attributes: ["genre"],
+                attributes: ["genre"],
           },
           {
             model: Publisher,
@@ -21,7 +22,18 @@ class BookController {
       resp.status(200).json(data);
     } catch (error) {
       // resp.status(500).json(error);
-      console.log(error);
+      console.log(error)
+    }
+  }
+
+  static async getStatusData(req, resp) {
+    try {
+      const id = req.id
+      let data = await Book.findAndCountAll(id)
+      resp.status(200).json(data)
+    } catch (error) {
+      resp.status(500).json(error)
+      console.log(error)
     }
   }
 
@@ -32,7 +44,7 @@ class BookController {
         where: {
           id,
         },
-        // include: [{ model: Publisher }],
+         // include: [{ model: Publisher }],
       });
       resp.status(200).json(data);
     } catch (error) {
@@ -43,31 +55,33 @@ class BookController {
 
   static async postData(req, resp) {
     try {
-      const { pub_id, title, price, desc } = req.body;
+      const { pub_id, title, price,  desc } = req.body;
       const data = await Book.create({
         pub_id,
         title,
         price,
-        image:
-          req.protocol +
-          "://" +
-          req.get("host") +
-          "/img/uploads/" +
-          req.file.filename,
+        image : req.protocol +
+        "://" +
+        req.get("host") +
+        "/img/uploads/" +
+        req.file.filename,
         desc,
       });
+
+
+      
 
       data
         ? resp.status(200).json({
             message: "Data ID has Added!",
-            data,
+            data
           })
         : resp.status(403).json({
             message: "Data ID Coulnd't be Added!",
           });
     } catch (error) {
       resp.status(500).json(error);
-      console.log(error);
+      console.log(error)
     }
   }
 
