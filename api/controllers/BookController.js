@@ -23,9 +23,10 @@ class BookController {
         ],
       });
       resp.status(200).json(data);
+      // console.log(data)
     } catch (error) {
-      // resp.status(500).json(error);
-      console.log(error);
+      resp.status(500).json(error);
+      // console.log(error);
     }
   }
 

@@ -4,11 +4,24 @@ const URL = "http://localhost:3000/api/books";
 
 const getLatestDataBook = async (cb) => {
   try {
-    let users = await axios({
+    let books = await axios({
       method: "GET",
       url: URL + '/latest',
     });
-    cb(users.data);
+    cb(books.data);
+  } catch (error) {
+    // console.log(error)
+    console.status(500).json(error);
+  }
+};
+
+const getDataBook = async (cb) => {
+  try {
+    let books = await axios({
+      method: "GET",
+      url: URL,
+    });
+    cb(books.data);
   } catch (error) {
     // console.log(error)
     console.status(500).json(error);
@@ -27,4 +40,4 @@ const getStatusBook = async (cb)=> {
     }
 }
 
-export { getLatestDataBook, getStatusBook };
+export { getLatestDataBook, getStatusBook, getDataBook };
