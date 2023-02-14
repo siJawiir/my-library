@@ -1,14 +1,17 @@
-const userRoute = require('express').Router();
-const UserController = require('../controllers/UserController');
+const userRoute = require("express").Router();
+const UserController = require("../controllers/UserController");
+const multer = require("../middleware/multer");
 
-userRoute.get('/', UserController.getData)
+userRoute.get("/", UserController.getData);
 userRoute.get("/status", UserController.getStatusData);
-userRoute.get('/user/:id', UserController.getDataBy)
-userRoute.post('/', UserController.postData)
-userRoute.put('/update/:id', UserController.putData)
-userRoute.delete('/delete/:id', UserController.deleteData)
-
-
-
+userRoute.get("/latest", UserController.getLatestData);
+userRoute.get("/detail/:id", UserController.getDataBy);
+userRoute.post("/", multer.upload.single("image"), UserController.postData);
+userRoute.put(
+  "/update/:id",
+  multer.upload.single("image"),
+  UserController.putData
+);
+userRoute.delete("/delete/:id", UserController.deleteData);
 
 module.exports = userRoute;

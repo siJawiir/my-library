@@ -2,13 +2,13 @@ import axios from "axios";
 
 const URL = "http://localhost:3000/api/books";
 
-const getData = async (cb) => {
+const getLatestDataBook = async (cb) => {
   try {
-    let books = await axios({
+    let users = await axios({
       method: "GET",
-      url: URL,
+      url: URL + '/latest',
     });
-    cb(books.data);
+    cb(users.data);
   } catch (error) {
     // console.log(error)
     console.status(500).json(error);
@@ -27,4 +27,4 @@ const getStatusBook = async (cb)=> {
     }
 }
 
-export { getData, getStatusBook };
+export { getLatestDataBook, getStatusBook };

@@ -2,11 +2,11 @@ import axios from "axios";
 
 const URL = "http://localhost:3000/api/users";
 
-const getData = async (cb) => {
+const getLatestDataUser = async (cb) => {
     try {
       let users = await axios({
         method: "GET",
-        url: URL,
+        url: URL + '/latest',
       });
       cb(users.data);
     } catch (error) {
@@ -27,5 +27,5 @@ const getData = async (cb) => {
       }
   }
   
-  export { getData, getStatusUser };
+  export { getLatestDataUser, getStatusUser };
   

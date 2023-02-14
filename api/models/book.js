@@ -25,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
       desc: DataTypes.STRING,
     },
     {
+      hooks: {
+        beforeCreate: (book, options) => {
+          book.image = book.image || "https://via.placeholder.com/100";
+        },
+      },
       sequelize,
       modelName: "Book",
     }

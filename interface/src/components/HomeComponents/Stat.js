@@ -27,7 +27,7 @@ function Stat() {
       <div className="flex items-center w-full justify-center">
         <div className="flex">
           <a
-            className="flex items-center py-2 px-2 mx-2 border-2 border-gray-50 rounded shadow-md w-48"
+            className="flex items-center py-2 px-2 mx-10 border-2 border-gray-50 rounded shadow-md w-48"
             href="/books"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full ">
@@ -41,7 +41,7 @@ function Stat() {
             </div>
           </a>
           <a
-            className="flex items-center py-2 px-2 mx-2 border-2 border-gray-50 rounded shadow-md w-48"
+            className="flex items-center py-2 px-2 mx-10 border-2 border-gray-50 rounded shadow-md w-48"
             href="/categories"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full">
@@ -52,12 +52,12 @@ function Stat() {
                 {genres}
               </p>
               <p className="w-8 text-xs leading-3 text-gray-500 pt-2 ">
-                Categories
+                Genres
               </p>
             </div>
           </a>
           <a
-            className="flex items-center py-2 px-2 mx-2 border-2 border-gray-50 rounded shadow-md w-48"
+            className="flex items-center py-2 px-2 mx-10 border-2 border-gray-50 rounded shadow-md w-48"
             href="/authors"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full">
@@ -68,12 +68,12 @@ function Stat() {
                 {publishers}
               </p>
               <p className="w-8 text-xs leading-3 text-gray-500 pt-2 ">
-                Authors
+                Publisher
               </p>
             </div>
           </a>
           <a
-            className="flex items-center py-2 px-2 mx-2 border-2 border-gray-50 rounded shadow-md w-48"
+            className="flex items-center py-2 px-2 mx-10 border-2 border-gray-50 rounded shadow-md w-48"
             href="/users"
           >
             <div className="flex items-center justify-center w-12 h-12 bg-red-100 rounded-full">

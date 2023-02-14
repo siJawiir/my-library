@@ -4,7 +4,10 @@ class UserController {
   static async getData(req, resp) {
     try {
       let data = await User.findAll({
-         include: [
+        order:[
+          ['id', 'ASC']
+        ], 
+        include: [
            {
               model: Auth,
                 attributes: ["user_id", "username"]
@@ -14,6 +17,21 @@ class UserController {
       resp.status(200).json(data);
     } catch (error) {
       resp.status(500).json(error);
+    }
+  }
+
+  static async getLatestData(req, resp) {
+    try {
+      let data = await User.findAll({
+        limit: 3,
+        order:[
+          ['createdAt', 'DESC']
+        ],
+      });
+      resp.status(200).json(data);
+    } catch (error) {
+      resp.status(500).json(error);
+      console.log(error)
     }
   }
 
@@ -47,12 +65,16 @@ class UserController {
         phone,
         address,
         city,
-        image,
+        image: req.protocol +
+        "://" +
+        req.get("host") +
+        "/img/uploads/" +
+        req.file.filename,
       });
       resp.status(201).json(data);
     } catch (error) {
-      resp.status(500).json(error);
-      // console.log(error)
+      // resp.status(500).json(error);
+      console.log(error)
     }
   }
 
@@ -66,7 +88,11 @@ class UserController {
           phone,
           address,
           city,
-          image,
+          image: req.protocol +
+          "://" +
+          req.get("host") +
+          "/img/uploads/" +
+          req.file.filename,
         },
         {
           where: { id },
@@ -91,7 +117,7 @@ class UserController {
       const id = +req.params.id;
       let data = await User.destroy({
         where: { id },
-        froce:true
+        force:true
       });
       data ?
       resp.status(200).json({
