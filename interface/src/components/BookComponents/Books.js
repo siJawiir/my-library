@@ -1,4 +1,5 @@
 import React from "react";
+// import BookPageAdd from "../../pages/books/BookPageAdd";
 import BookMenu from "../BookMenu";
 import TableBook from "./TableBook";
 
@@ -12,8 +13,7 @@ function Books() {
           <BookMenu Books="font-semibold bg-gray-50" />
         </div>
           <div>
-          <TableBook />
-
+          <TableBook/>
           </div>
       </main>
     </div>

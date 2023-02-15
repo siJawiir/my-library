@@ -29,7 +29,7 @@ function Book() {
               {e.title}
             </h5>
             <p className="mb-6 font-normal text-gray-500 truncate w-48 ">
-              Publisher: {e?.["Publisher"]["pub_name"]}
+              Publisher: {e["Publisher"]?.["pub_name"]}
             </p>
             <p className="mb-8 text-xl font-bold text-green-700 truncate w-48 ">
               Rp. {e.price},-

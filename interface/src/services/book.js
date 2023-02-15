@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const URL = "http://localhost:3000/api/books";
 
@@ -40,4 +41,23 @@ const getStatusBook = async (cb)=> {
     }
 }
 
-export { getLatestDataBook, getStatusBook, getDataBook };
+const addData = async (book) => {
+  try {
+    let books = await axios({
+      method: "POST",
+      url: URL,
+      data: book,
+    });
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Data has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  } catch (error) {
+    console.status(500).json(error)
+  }
+}
+
+export { getLatestDataBook, getStatusBook, getDataBook, addData };

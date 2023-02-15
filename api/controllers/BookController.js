@@ -5,9 +5,7 @@ class BookController {
   static async getData(req, resp) {
     try {
       let data = await Book.findAll({
-        order: [
-          ['id', 'ASC']
-        ],
+        order: [["id", "ASC"]],
         include: [
           {
             model: Genre,
@@ -16,9 +14,6 @@ class BookController {
           {
             model: Publisher,
             attributes: ["pub_name"],
-          },
-          {
-            model: Cart,
           },
         ],
       });
@@ -48,12 +43,19 @@ class BookController {
         where: {
           id,
         },
-        // include: [{ model: Publisher }],
+        include: [
+          {
+            model: Publisher,
+          },
+          {
+            model: Cart,
+          },
+        ],
       });
       resp.status(200).json(data);
     } catch (error) {
       resp.status(500).json(error);
-      // console.log(error)
+      // console.log(error);
     }
   }
 
@@ -61,25 +63,25 @@ class BookController {
     try {
       let data = await Book.findAll({
         limit: 3,
-        order:[
-          ['createdAt', 'DESC']
-        ],
+        order: [["createdAt", "DESC"]],
         include: [
           {
-            model: Publisher
-          }
-        ]
+            model: Publisher,
+          },
+        ],
       });
       resp.status(200).json(data);
     } catch (error) {
       resp.status(500).json(error);
-      console.log(error)
+      console.log(error);
     }
   }
 
   static async postData(req, resp) {
     try {
       const { pub_id, title, price, desc } = req.body;
+      // if (!req.file) return resp.send('Please upload a file')
+      // const { filename} = req.file;
       const data = await Book.create({
         pub_id,
         title,

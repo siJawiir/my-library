@@ -47,7 +47,7 @@ function TableBook() {
                     </td>
                     <td className="pl-12">
                       <p className="text-sm font-medium leading-none text-gray-800">
-                        {e["Publisher"]?.["pub_name"]}
+                        {e?.["Publisher"]["pub_name"]}
                       </p>
                     </td>
                     <td className="pl-12">
@@ -90,10 +90,8 @@ function TableBook() {
             )}
           </tbody>
           <div className="text-center w-18 bg-green-600 p-3 cursor-pointer text-white d-flex flex-row rounded-full mx-5 my-10">
-            <a href={`/books/add`}>
             <p>Add Book's</p>
             <FaPlusCircle className="mx-auto text=center" />
-            </a>
           </div>
         </table>
       </div>
