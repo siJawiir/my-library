@@ -21,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     image: DataTypes.STRING
   }, {
+    hooks: {
+      beforeCreate: (user, options) => {
+        user.image = user.image || "https://via.placeholder.com/100";
+      },
+    },
     sequelize,
     modelName: 'User',
   });

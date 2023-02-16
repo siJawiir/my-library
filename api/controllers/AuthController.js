@@ -36,7 +36,7 @@ class AuthController {
           let access_token = tokenGenerator(emailFound);
 
           let verifyToken = tokenVerifier(access_token);
-          // console.log(verifyToken);
+          console.log(verifyToken);
           resp.status(200).json(access_token);
         } else {
           resp.status(400).json({

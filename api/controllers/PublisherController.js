@@ -17,6 +17,18 @@ class PublisherController {
        }
     }
 
+    
+    static async getStatusData(req, resp) {
+      try {
+        const id = req.id
+        let data = await Publisher.findAndCountAll(id)
+        resp.status(200).json(data)
+      } catch (error) {
+        resp.status(500).json(error)
+        console.log(error)
+      }
+    }
+
      static async postData(req, resp) {
       try {
          const { pub_name, address } = req.body;
