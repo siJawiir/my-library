@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { getDataBook } from "../../services/book";
+import { Link } from "react-router-dom";
+import { getDataBook, deleteData } from "../../services/book";
 import { FaEdit, FaPlusCircle, FaTrash } from "react-icons/fa";
 
 function TableBook() {
@@ -8,6 +9,10 @@ function TableBook() {
     getDataBook((result) => setBooks(result));
   }, []);
 
+  // const navigate = useNavigate();
+  const deleteHandler = (id) => {
+    deleteData(id);
+  };
   return (
     <>
       <div>
@@ -38,11 +43,9 @@ function TableBook() {
                     <td className="pl-2 cursor-pointer">{i + 1}</td>
                     <td className="pl-12">
                       <a href={`/books/detail/${id}`}>
-                      <p className="text-sm font-medium leading-none text-gray-800">
-                        <u>
-                        {e.title}
-                        </u>
-                      </p>
+                        <p className="text-sm font-medium leading-none text-gray-800">
+                          <u>{e.title}</u>
+                        </p>
                       </a>
                     </td>
                     <td className="pl-12">
@@ -69,30 +72,32 @@ function TableBook() {
                     </td>
                     <td className="pl-12">
                       <br />
-                      <a href={`/books/update/${id}`}>
-                      <div className="text-xs w-18 bg-primary2 p-2 cursor-pointer text-white flex flex-row rounded-full mx-1">
-                      <FaEdit className="mr-2" />
-                        <p>Edit</p>
-                      </div>
-                      </a>
+                      <Link to={`/books/update/${id}`}>
+                        <div className="text-xs w-18 bg-primary2 p-2 cursor-pointer text-white flex flex-row rounded-full mx-1">
+                          <FaEdit className="mr-2" />
+                          <p>Edit</p>
+                        </div>
+                      </Link>
                       <br />
+                        <Link to={"/books/"} onClick={() => deleteHandler(id)}>
                       <div className="text-xs w-18 bg-red-600 p-2 cursor-pointer text-white flex flex-row rounded-full mx-1">
-                        <FaTrash className="mr-2" />
-                        <p>Delete</p>
+                          <FaTrash className="mr-2" />
+                          <p>Delete</p>
                       </div>
+                        </Link>
                       <br />
                     </td>
                   </tr>
                 );
               })
             ) : (
-              <h4 className="text-center">Loading..</h4>
+              <h1 className="text-center">Loading..</h1>
             )}
           </tbody>
           <div className="text-center w-18 bg-green-600 p-3 cursor-pointer text-white d-flex flex-row rounded-full mx-5 my-10">
             <a href={`/books/add`}>
-            <p>Add Book's</p>
-            <FaPlusCircle className="mx-auto text=center" />
+              <p>Add Book's</p>
+              <FaPlusCircle className="mx-auto text=center" />
             </a>
           </div>
         </table>

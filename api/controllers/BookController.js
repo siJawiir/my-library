@@ -79,19 +79,14 @@ class BookController {
 
   static async postData(req, resp) {
     try {
-      const { pub_id, title, price, desc } = req.body;
-      // if (!req.file) return resp.send('Please upload a file')
-      // const { filename} = req.file;
+      const { pub_id, title, image, price, desc } = req.body;
+      if (!req.file) return resp.send('Please upload a file')
+      // const { filename} = req.file.filename;
       const data = await Book.create({
         pub_id,
         title,
         price,
-        image:
-          req.protocol +
-          "://" +
-          req.get("host") +
-          "/img/uploads/" +
-          req.file.filename,
+        image: req.protocol + "://" + req.get("host") + "/img/uploads/" + req.file.filename,
         desc,
       });
 
@@ -140,6 +135,7 @@ class BookController {
           });
     } catch (error) {
       resp.status(500).json(error);
+      // console.log(error);
     }
   }
 
