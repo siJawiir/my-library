@@ -9,7 +9,7 @@ import {
 import Dropdown from "../../utils/Dropdown";
 import SortButton from "../../utils/SortButton";
 
-function Table() {
+function TableUser() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-row">
@@ -138,4 +138,4 @@ function Table() {
   );
 }
 
-export default Table;
+export default TableUser;
